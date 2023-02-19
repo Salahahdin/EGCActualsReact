@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-    //import './src/index.css';
-    import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import {SettingOutlined } from '@ant-design/icons';
+import { MenuProps, Modal } from 'antd';
 import { Menu } from 'antd';
+
+import FormApp from './formApp';
+
 
 const items: MenuProps['items'] = [
   {
@@ -24,15 +26,29 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const EGCMenu: React.FC = () => {
+
+const EGCMenu = () => {
   const [current, setCurrent] = useState('mail');
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
-  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+
+  return (<><Menu onClick={showModal} selectedKeys={[current]} mode="horizontal" items={items} /><Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+  <FormApp/>
+  </Modal></>
+  );
 };
 
 export default EGCMenu;
