@@ -46,7 +46,11 @@ const EGCMenu = () => {
 
 
   return (<><Menu onClick={showModal} selectedKeys={[current]} mode="horizontal" items={items} /><Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-  <FormApp/>
+  <div> 
+                    <div className='ModalContainer'>
+                        <FormApp />
+                    </div>
+                </div>
   </Modal></>
   );
 };
